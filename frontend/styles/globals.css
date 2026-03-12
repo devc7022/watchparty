@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0f;
+  color: #e8e8f0;
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #10101a; }
+::-webkit-scrollbar-thumb { background: #2a2a4a; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #e63946; }
+
+/* Film grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Glow effects */
+.glow-red {
+  box-shadow: 0 0 20px rgba(230, 57, 70, 0.3);
+}
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(255, 214, 10, 0.4);
+}
+
+/* Card */
+.cinema-card {
+  background: #16162a;
+  border: 1px solid #2a2a4a;
+  border-radius: 2px;
+}
+
+/* Input */
+.cinema-input {
+  background: #10101a;
+  border: 1px solid #2a2a4a;
+  color: #e8e8f0;
+  font-family: var(--font-body);
+  transition: border-color 0.2s;
+  border-radius: 2px;
+  outline: none;
+}
+.cinema-input:focus {
+  border-color: #e63946;
+}
+.cinema-input::placeholder {
+  color: #6b6b8a;
+}
+
+/* Button */
+.cinema-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.cinema-btn-primary {
+  background: #e63946;
+  color: #fff;
+  border: none;
+}
+.cinema-btn-primary:hover {
+  background: #c1121f;
+  box-shadow: 0 0 20px rgba(230,57,70,0.4);
+}
+.cinema-btn-secondary {
+  background: transparent;
+  color: #e8e8f0;
+  border: 1px solid #2a2a4a;
+}
+.cinema-btn-secondary:hover {
+  border-color: #e63946;
+  color: #e63946;
+}
+.cinema-btn-ghost {
+  background: transparent;
+  border: none;
+  color: #6b6b8a;
+}
+.cinema-btn-ghost:hover {
+  color: #e8e8f0;
+}
+
+/* Badge */
+.role-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 1px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.role-host { background: rgba(255,214,10,0.15); color: #ffd60a; border: 1px solid rgba(255,214,10,0.3); }
+.role-moderator { background: rgba(100,180,255,0.1); color: #74b9ff; border: 1px solid rgba(100,180,255,0.2); }
+.role-participant { background: rgba(107,107,138,0.15); color: #6b6b8a; border: 1px solid rgba(107,107,138,0.2); }
+
+/* Divider */
+.cinema-divider {
+  border: none;
+  border-top: 1px solid #2a2a4a;
+}
+
+/* Highlight bar */
+.highlight-bar {
+  position: relative;
+}
+.highlight-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e63946;
+}
+
+/* Live indicator */
+.live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e63946;
+  animation: pulse-live 1.5s ease-in-out infinite;
+}
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* Chat message animation */
+.chat-message {
+  animation: slideUp 0.2s ease forwards;
+}
+
+/* Player wrapper */
+.player-wrapper {
+  position: relative;
+  background: #000;
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+
+.player-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Filmstrip decoration */
+.filmstrip {
+  display: flex;
+  gap: 2px;
+}
+.filmstrip-hole {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: #2a2a4a;
+  flex-shrink: 0;
+}
